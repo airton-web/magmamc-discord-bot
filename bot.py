@@ -21,9 +21,10 @@ intents.members = True  # usado na Etapa 3 (boas-vindas); exige ativar no portal
 
 class MagmaBot(commands.Bot):
     async def setup_hook(self):
-        await self.load_extension("parceria")  # sistema "Seja Parceiro" (parceria.py)
-        self.add_view(PainelTicket())  # mantém os botões e o menu
-        self.add_view(FecharTicket())  # funcionando após reiniciar
+        await self.load_extension("parceria")  # sistema "Seja Parceiro"
+        await self.load_extension("embeds")    # construtor de embeds
+        self.add_view(PainelTicket())
+        self.add_view(FecharTicket())
         self.tree.add_command(ticket)
         synced = await self.tree.sync()
         print(f"{len(synced)} comando(s) sincronizado(s)")
